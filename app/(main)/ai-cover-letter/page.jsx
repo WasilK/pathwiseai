@@ -3,8 +3,18 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CoverLetterList from "./_components/cover-letter-list";
+import { getUserOnboardingStatus } from "@/actions/user";
+import { redirect } from "next/navigation";
 
 export default async function CoverLetterPage() {
+  const { isOnboarded } = await getUserOnboardingStatus();
+
+  // If not onboarded, redirect to onboarding page
+  // Skip this check if already on the onboarding page
+  if (!isOnboarded) {
+    redirect("/onboarding?redirectTo=/ai-cover-letter");
+  }
+
   const coverLetters = await getCoverLetters();
 
   return (
