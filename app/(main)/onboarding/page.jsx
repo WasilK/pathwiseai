@@ -3,17 +3,17 @@ import { industries } from "@/data/industries";
 import OnboardingForm from "./_components/onboarding-form";
 import { getUserOnboardingStatus } from "@/actions/user";
 
-export default async function OnboardingPage() {
+export default async function OnboardingPage({ searchParams }) {
   // Check if user is already onboarded
   const { isOnboarded } = await getUserOnboardingStatus();
 
   if (isOnboarded) {
-    redirect("/dashboard");
+    redirect(searchParams.redirectTo || "/dashboard");
   }
 
   return (
     <main>
-      <OnboardingForm industries={industries} />
+      <OnboardingForm industries={industries} redirectTo={searchParams.redirectTo}/>
     </main>
   );
 }

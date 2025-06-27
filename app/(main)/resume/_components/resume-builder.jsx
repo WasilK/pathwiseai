@@ -97,8 +97,8 @@ export default function ResumeBuilder({ initialContent }) {
     const parts = [];
     if (contactInfo.email) parts.push(`${contactInfo.email}`);
     if (contactInfo.mobile) parts.push(`${contactInfo.mobile}`);
-    if (contactInfo.linkedin) parts.push(`[LinkedIn](${contactInfo.linkedin})`);
-    if (contactInfo.github) parts.push(`[Github](${contactInfo.github})`);
+    if (contactInfo.linkedin) parts.push(`LinkedIn: ${contactInfo.linkedin}`);
+    if (contactInfo.github) parts.push(`Github: ${contactInfo.github}`);
 
     return parts.length > 0
       ? `## ${user.fullName}

@@ -2,8 +2,18 @@ import { getAssessments } from "@/actions/interview";
 import StatsCards from "./_components/stats-cards";
 import PerformanceChart from "./_components/performance-chart";
 import QuizList from "./_components/quiz-list";
+import { getUserOnboardingStatus } from "@/actions/user";
+import { redirect } from "next/navigation";
 
 export default async function InterviewPrepPage() {
+  const { isOnboarded } = await getUserOnboardingStatus();
+
+  // If not onboarded, redirect to onboarding page
+  // Skip this check if already on the onboarding page
+  if (!isOnboarded) {
+    redirect("/onboarding?redirectTo=/interview");
+  }
+
   const assessments = await getAssessments();
 
   return (
